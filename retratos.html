@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retratos - Fotografia Pachuca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="nav nav--split" aria-label="Principal">
+        <a class="logo" href="index.html" aria-label="Inicio de Fotografia Pachuca">
+          <span class="logo-script">Fotografia</span>
+          <span class="logo-text">Pachuca</span>
+        </a>
+        <div class="nav-group">
+          <div class="nav-item nav-item--dropdown">
+            <a href="galeria.html" class="nav-link">Galeria</a>
+            <div class="nav-dropdown">
+              <a href="boda.html">Boda</a>
+              <a href="quince.html">Quince años</a>
+              <a href="retratos.html">Retratos</a>
+            </div>
+          </div>
+          <a href="contacto.html">Contacto</a>
+          <a href="info.html">Informacion</a>
+        </div>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <div class="mobile-menu__inner">
+      <a href="index.html#services">Servicios</a>
+      <div class="mobile-menu__item">
+        <a href="galeria.html">Galeria</a>
+        <div class="mobile-menu__sublist">
+          <a href="boda.html">Boda</a>
+          <a href="quince.html">Quince años</a>
+          <a href="retratos.html">Retratos</a>
+        </div>
+      </div>
+      <a href="info.html">Informacion</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="mobile-menu__cta" href="index.html#booking">Reserva ahora</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero__content">
+        <p class="eyebrow">Galeria</p>
+        <h1>Retratos</h1>
+        <p>Retratos naturales con luz suave y fondos limpios.</p>
+      </div>
+    </section>
+
+    <section class="section portfolio">
+      <div class="container">
+        <div class="gallery">
+          <button class="photo photo--wide reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo photo--wide reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1507152832244-10d45c7d58d8?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1507152832244-10d45c7d58d8?auto=format&fit=crop&w=1400&q=80')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=80" style="--gallery-image: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=80')"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-title">Fotografia Pachuca</p>
+        <p>Estudio de fotografia en Pachuca.</p>
+      </div>
+      <div>
+        <p class="footer-title">Contacto</p>
+        <p>hola@fotografiapachuca.mx</p>
+        <p>+52 771 000 0000</p>
+      </div>
+      <div>
+        <p class="footer-title">Social</p>
+        <p>Instagram / Facebook / Pinterest</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>(c) 2024 Fotografia Pachuca</span>
+      <button class="to-top" type="button">Arriba</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

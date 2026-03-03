@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informacion - Fotografia Pachuca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="nav nav--split" aria-label="Principal">
+        <a class="logo" href="index.html" aria-label="Inicio de Fotografia Pachuca">
+          <span class="logo-script">Fotografia</span>
+          <span class="logo-text">Pachuca</span>
+        </a>
+        <div class="nav-group">
+          <div class="nav-item nav-item--dropdown">
+            <a href="galeria.html" class="nav-link">Galeria</a>
+            <div class="nav-dropdown">
+              <a href="boda.html">Boda</a>
+              <a href="quince.html">Quince años</a>
+              <a href="retratos.html">Retratos</a>
+            </div>
+          </div>
+          <a href="contacto.html">Contacto</a>
+          <a href="info.html">Info</a>
+        </div>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <div class="mobile-menu__inner">
+      <a href="index.html#services">Servicios</a>
+      <div class="mobile-menu__item">
+        <a href="galeria.html">Galeria</a>
+        <div class="mobile-menu__sublist">
+          <a href="boda.html">Boda</a>
+          <a href="quince.html">Quince años</a>
+          <a href="retratos.html">Retratos</a>
+        </div>
+      </div>
+      <a href="info.html">Informacion</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="mobile-menu__cta" href="index.html#booking">Reserva ahora</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero__content">
+        <p class="eyebrow">Informacion</p>
+        <h1>Sobre nosotros</h1>
+        <p>Trabajamos con luz natural, composiciones suaves y una experiencia tranquila.</p>
+      </div>
+    </section>
+
+    <section class="section story">
+      <div class="container story-inner">
+        <div class="story-copy reveal">
+          <p class="eyebrow">Sobre nosotros</p>
+          <h2>Somos un estudio boutique</h2>
+          <p>Creemos en fotografias que respiran calma. Nuestro proceso es sencillo: escuchamos, planeamos y capturamos con discrecion.</p>
+          <div class="story-details">
+            <div>
+              <p class="detail-label">Ciudad</p>
+              <p>Pachuca, Mexico</p>
+            </div>
+            <div>
+              <p class="detail-label">Experiencia</p>
+              <p>10+ años</p>
+            </div>
+          </div>
+        </div>
+        <div class="story-visual reveal" aria-hidden="true">
+          <div class="photo photo--tall"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Proceso</p>
+          <h2>De la idea a la entrega</h2>
+        </div>
+        <div class="cta-strip">
+          <div class="cta-card">
+            <p class="detail-label">Paso 1</p>
+            <p>Agenda una llamada y definimos el estilo.</p>
+          </div>
+          <div class="cta-card">
+            <p class="detail-label">Paso 2</p>
+            <p>Sesiones cortas, dirigidas y naturales.</p>
+          </div>
+          <div class="cta-card">
+            <p class="detail-label">Paso 3</p>
+            <p>Entrega digital con seleccion curada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-title">Fotografia Pachuca</p>
+        <p>Estudio de fotografia en Pachuca.</p>
+      </div>
+      <div>
+        <p class="footer-title">Contacto</p>
+        <p>hola@fotografiapachuca.mx</p>
+        <p>+52 771 000 0000</p>
+      </div>
+      <div>
+        <p class="footer-title">Social</p>
+        <p>Instagram / Facebook / Pinterest</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>(c) 2024 Fotografia Pachuca</span>
+      <button class="to-top" type="button">Arriba</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fotografia Pachuca - Estudio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-home">
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="nav nav--split" aria-label="Principal">
+        <a class="logo" href="#top" aria-label="Inicio de Fotografia Pachuca">
+          <span class="logo-script">Fotografia</span>
+          <span class="logo-text">Pachuca</span>
+        </a>
+        <div class="nav-group">
+          <div class="nav-item nav-item--dropdown">
+            <a href="galeria.html" class="nav-link">Galeria</a>
+            <div class="nav-dropdown">
+              <a href="boda.html">Boda</a>
+              <a href="quince.html">Quince años</a>
+              <a href="retratos.html">Retratos</a>
+            </div>
+          </div>
+          <a href="contacto.html">Contacto</a>
+          <a href="info.html">Info</a>
+        </div>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <div class="mobile-menu__inner">
+      <a href="index.html#services">Servicios</a>
+      <div class="mobile-menu__item">
+        <a href="galeria.html">Galeria</a>
+        <div class="mobile-menu__sublist">
+          <a href="boda.html">Boda</a>
+          <a href="quince.html">Quince años</a>
+          <a href="retratos.html">Retratos</a>
+        </div>
+      </div>
+      <a href="info.html">Informacion</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="mobile-menu__cta" href="index.html#booking">Reserva ahora</a>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero hero--full hero--static" data-hero-images="images/DSC_0473.jpg, images/15-Recuperado-Recuperado.jpg, images/_NNF0238.jpg, images/DSC_0069.jpg, images/_NNF0597.jpg">
+      <img class="hero-image hero-image--static" src="images/DSC_0473.jpg" alt="Fotografia de portada" />
+      <img class="hero-image hero-image--static hero-image--fade" src="images/DSC_0473.jpg" alt="" aria-hidden="true" />
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <button class="hero-arrow hero-arrow--left" type="button" data-hero-prev aria-label="Anterior">&#8592;</button>
+      <button class="hero-arrow hero-arrow--right" type="button" data-hero-next aria-label="Siguiente">&#8594;</button>
+      <div class="hero-label">Regnier</div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Servicios</p>
+          <h2>Conoce nuestra calidad</h2>
+        </div>
+        <div class="service-grid service-grid--tiles">
+          <a class="service-card service-card--link reveal" href="retratos.html" data-image="images_optimized/DSC_01443 (4).jpg" style="--card-image: url('images_optimized/DSC_01443 (4).jpg')">
+            <span class="service-card__bg" aria-hidden="true"></span>
+            <span class="service-title">Retratos</span>
+          </a>
+          <a class="service-card service-card--link reveal" href="quince.html" data-image="images_optimized/_NNF0058.jpg" style="--card-image: url('images_optimized/_NNF0058.jpg')">
+            <span class="service-card__bg" aria-hidden="true"></span>
+            <span class="service-title">Quince años</span>
+          </a>
+          <a class="service-card service-card--link reveal" href="boda.html" data-image="images_optimized/_NNF0597.jpg" style="--card-image: url('images_optimized/_NNF0597.jpg')">
+            <span class="service-card__bg" aria-hidden="true"></span>
+            <span class="service-title">Boda</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section portfolio">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Galeria</p>
+          <h2>Historias contadas con luz calida</h2>
+        </div>
+        <div class="gallery">
+          <button class="photo photo--wide reveal gallery-item" type="button" data-image="images/DSC_0416.jpg" style="--gallery-image: url('images_optimized/DSC_0416.jpg')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="images/DSC_0910.jpg" style="--gallery-image: url('images_optimized/DSC_0910.jpg')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="images/DSC_0338.jpg" style="--gallery-image: url('images_optimized/DSC_0338.jpg')"></button>
+          <button class="photo reveal gallery-item" type="button" data-image="images/_NNF0261.jpg" style="--gallery-image: url('images_optimized/_NNF0261.jpg')"></button>
+          <button class="photo photo--wide reveal gallery-item" type="button" data-image="images/_NNF0238.jpg" style="--gallery-image: url('images_optimized/_NNF0238.jpg')"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="section story">
+      <div class="container story-inner">
+        <div class="story-copy reveal">
+          <p class="eyebrow">Sobre mi</p>
+          <h2>Eduardo Regnier</h2>
+          <p>Creemos que las fotografias deben sentirse atemporales. Con un enfoque calmado y ojo para los momentos intermedios, creamos galerias honestas y naturales.</p>
+          <div class="story-details">
+            <div>
+              <p class="detail-label">Estudio</p>
+              <p>Pachuca, Hidalgo</p>
+            </div>
+            <div>
+              <p class="detail-label">Experiencia</p>
+              <p>+10 años</p>
+            </div>
+          </div>
+        </div>
+        <div class="story-visual reveal" aria-hidden="true">
+          <div class="photo photo--tall"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Palabras bonitas</p>
+          <h2>Notas de nuestras parejas</h2>
+        </div>
+        <div class="testimonial-grid">
+          <figure class="testimonial reveal">
+            <blockquote>&quot;Cada foto se siente como un recuerdo. El dia paso rapido, pero la galeria lo trae de vuelta.&quot;</blockquote>
+            <figcaption>Ida + Jonas</figcaption>
+          </figure>
+          <figure class="testimonial reveal">
+            <blockquote>&quot;Nos hicieron sentir tranquilos y vistos. Las imagenes son atemporales y calidas.&quot;</blockquote>
+            <figcaption>Lea + Henrik</figcaption>
+          </figure>
+          <figure class="testimonial reveal">
+            <blockquote>&quot;Queriamos retratos naturales y honestos, y supero todo lo que esperabamos.&quot;</blockquote>
+            <figcaption>Nora + Elias</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="section booking">
+      <div class="container booking-inner">
+        <div class="booking-copy reveal">
+          <p class="eyebrow">Reservas</p>
+          <h2>Cuentanos sobre tu dia</h2>
+          <p>Tomamos un numero limitado de sesiones cada mes para crear una experiencia cercana y personal.</p>
+        </div>
+        <form class="booking-form reveal" id="contact">
+          <label>
+            Nombre
+            <input type="text" placeholder="Tu nombre" required />
+          </label>
+          <label>
+            Correo
+            <input type="email" placeholder="hola@email.com" required />
+          </label>
+          <label>
+            Tipo de sesion
+            <select required>
+              <option value="">Elige una</option>
+              <option>Boda</option>
+              <option>Familia</option>
+              <option>Recien nacido</option>
+              <option>Parejas</option>
+            </select>
+          </label>
+          <label>
+            Mensaje
+            <textarea rows="4" placeholder="Cuentanos tu historia"></textarea>
+          </label>
+          <button class="button" type="submit">Enviar solicitud</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section instagram">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Instagram</p>
+          <h2>@Fotografiapachuca</h2>
+        </div>
+        <div class="instagram-grid">
+          <div class="photo photo--square reveal"></div>
+          <div class="photo photo--square reveal"></div>
+          <div class="photo photo--square reveal"></div>
+          <div class="photo photo--square reveal"></div>
+          <div class="photo photo--square reveal"></div>
+          <div class="photo photo--square reveal"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-title">Fotografia Pachuca</p>
+        <p>Estudio de fotografia en Pachuca.</p>
+      </div>
+      <div>
+        <p class="footer-title">Contacto</p>
+        <p>hola@fotografiapachuca.mx</p>
+        <p>+52 771 000 0000</p>
+      </div>
+      <div>
+        <p class="footer-title">Social</p>
+        <p>Instagram / Facebook / Pinterest</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>(c) 2024 Fotografia Pachuca</span>
+      <button class="to-top" type="button">Arriba</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
