@@ -4,8 +4,27 @@ const toTopButton = document.querySelector('.to-top');
 const reveals = document.querySelectorAll('.reveal');
 const serviceCards = document.querySelectorAll('.service-card--link');
 const heroSection = document.querySelector('.hero--static');
+const pageHeroSection = document.querySelector('.page-hero');
+const logo = document.querySelector('.logo');
+const navGroup = document.querySelector('.nav-group');
+const heroArrowTargets = Array.from(document.querySelectorAll('.hero-arrow'));
+const headerContrastTargets = [logo, navGroup, menuToggle, ...heroArrowTargets].filter(Boolean);
+let headerContrastRequestId = 0;
 
-const updateServiceCardContrast = (card, src) => {
+const getAverageBrightnessFromImageData = (data) => {
+  let total = 0;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    total += 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  return total / (data.length / 4);
+};
+
+const getImageAverageBrightness = (src, onResult, onError) => {
   const img = new Image();
   img.crossOrigin = 'anonymous';
   img.src = src;
@@ -17,16 +36,18 @@ const updateServiceCardContrast = (card, src) => {
     canvas.height = size;
     ctx.drawImage(img, 0, 0, size, size);
     const { data } = ctx.getImageData(0, 0, size, size);
-    let total = 0;
-
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      total += 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    onResult(getAverageBrightnessFromImageData(data));
+  };
+  img.onerror = () => {
+    if (typeof onError === 'function') {
+      onError();
     }
+  };
+};
 
-    const avg = total / (data.length / 4);
+const updateServiceCardContrast = (card, src) => {
+  const title = card.querySelector('.service-title');
+  const applyContrast = (avg) => {
     if (avg < 140) {
       card.classList.add('is-dark');
       card.classList.remove('is-light');
@@ -34,6 +55,36 @@ const updateServiceCardContrast = (card, src) => {
       card.classList.add('is-light');
       card.classList.remove('is-dark');
     }
+  };
+
+  if (!title) {
+    getImageAverageBrightness(src, applyContrast, () => {
+      card.classList.add('is-dark');
+      card.classList.remove('is-light');
+    });
+    return;
+  }
+
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = src;
+  img.onload = () => {
+    const sampleRect = getCoverSampleRect(
+      card.getBoundingClientRect(),
+      img.naturalWidth || img.width,
+      img.naturalHeight || img.height,
+      title.getBoundingClientRect()
+    );
+
+    if (!sampleRect) {
+      getImageAverageBrightness(src, applyContrast, () => {
+        card.classList.add('is-dark');
+        card.classList.remove('is-light');
+      });
+      return;
+    }
+
+    applyContrast(getRegionAverageBrightness(img, sampleRect));
   };
   img.onerror = () => {
     card.classList.add('is-dark');
@@ -54,46 +105,179 @@ const setMobileMenuContrast = (isDark) => {
   }
 };
 
-const setHeroTextContrast = (src) => {
+const setHeaderContrastMode = (isDark) => {
+  if (isDark) {
+    document.body.classList.add('is-dark-hero');
+    document.body.classList.remove('is-light-hero');
+  } else {
+    document.body.classList.add('is-light-hero');
+    document.body.classList.remove('is-dark-hero');
+  }
+  setMobileMenuContrast(isDark);
+};
+
+const setHeaderTextContrast = (src) => {
   if (!src) {
+    setHeaderContrastMode(false);
     return;
   }
+  getImageAverageBrightness(src, (avg) => {
+    setHeaderContrastMode(avg < 140);
+  }, () => {
+    setHeaderContrastMode(true);
+  });
+};
+
+const getBackgroundImageUrl = (element) => {
+  if (!element) {
+    return '';
+  }
+  const backgroundImage = getComputedStyle(element).backgroundImage;
+  const match = backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
+  return match ? match[2] : '';
+};
+
+const setHeaderZoneContrast = (target, isDark) => {
+  target.classList.toggle('is-dark-zone', isDark);
+  target.classList.toggle('is-light-zone', !isDark);
+};
+
+const clearHeaderZoneContrast = () => {
+  headerContrastTargets.forEach((target) => {
+    target.classList.remove('is-dark-zone', 'is-light-zone');
+  });
+};
+
+const getRectIntersection = (firstRect, secondRect) => {
+  const left = Math.max(firstRect.left, secondRect.left);
+  const top = Math.max(firstRect.top, secondRect.top);
+  const right = Math.min(firstRect.right, secondRect.right);
+  const bottom = Math.min(firstRect.bottom, secondRect.bottom);
+
+  if (right <= left || bottom <= top) {
+    return null;
+  }
+
+  return {
+    left,
+    top,
+    width: right - left,
+    height: bottom - top,
+  };
+};
+
+const getCoverSampleRect = (containerRect, imageWidth, imageHeight, targetRect) => {
+  const intersection = getRectIntersection(targetRect, containerRect);
+
+  if (!intersection) {
+    return null;
+  }
+
+  const scale = Math.max(
+    containerRect.width / imageWidth,
+    containerRect.height / imageHeight
+  );
+  const renderedWidth = imageWidth * scale;
+  const renderedHeight = imageHeight * scale;
+  const offsetX = (containerRect.width - renderedWidth) / 2;
+  const offsetY = (containerRect.height - renderedHeight) / 2;
+  const sourceX = (intersection.left - containerRect.left - offsetX) / scale;
+  const sourceY = (intersection.top - containerRect.top - offsetY) / scale;
+  const sourceWidth = intersection.width / scale;
+  const sourceHeight = intersection.height / scale;
+
+  const clampedX = Math.max(0, sourceX);
+  const clampedY = Math.max(0, sourceY);
+  const clampedWidth = Math.min(imageWidth - clampedX, sourceWidth);
+  const clampedHeight = Math.min(imageHeight - clampedY, sourceHeight);
+
+  if (clampedWidth <= 0 || clampedHeight <= 0) {
+    return null;
+  }
+
+  return {
+    x: clampedX,
+    y: clampedY,
+    width: clampedWidth,
+    height: clampedHeight,
+  };
+};
+
+const getRegionAverageBrightness = (img, sampleRect) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  const size = 40;
+  canvas.width = size;
+  canvas.height = size;
+  ctx.drawImage(
+    img,
+    sampleRect.x,
+    sampleRect.y,
+    sampleRect.width,
+    sampleRect.height,
+    0,
+    0,
+    size,
+    size
+  );
+  const { data } = ctx.getImageData(0, 0, size, size);
+  return getAverageBrightnessFromImageData(data);
+};
+
+const updateHeaderZoneContrast = (src, container) => {
+  if (!src || !container || !headerContrastTargets.length) {
+    clearHeaderZoneContrast();
+    return;
+  }
+
+  const requestId = ++headerContrastRequestId;
   const img = new Image();
   img.crossOrigin = 'anonymous';
   img.src = src;
   img.onload = () => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    const size = 40;
-    canvas.width = size;
-    canvas.height = size;
-    ctx.drawImage(img, 0, 0, size, size);
-    const { data } = ctx.getImageData(0, 0, size, size);
-    let total = 0;
-
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      total += 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    if (requestId !== headerContrastRequestId) {
+      return;
     }
 
-    const avg = total / (data.length / 4);
-    if (avg < 140) {
-      document.body.classList.add('is-dark-hero');
-      document.body.classList.remove('is-light-hero');
-      setMobileMenuContrast(true);
-    } else {
-      document.body.classList.add('is-light-hero');
-      document.body.classList.remove('is-dark-hero');
-      setMobileMenuContrast(false);
-    }
+    const containerRect = container.getBoundingClientRect();
+    const fallbackIsDark = document.body.classList.contains('is-dark-hero');
+
+    headerContrastTargets.forEach((target) => {
+      const sampleRect = getCoverSampleRect(
+        containerRect,
+        img.naturalWidth || img.width,
+        img.naturalHeight || img.height,
+        target.getBoundingClientRect()
+      );
+
+      if (!sampleRect) {
+        setHeaderZoneContrast(target, fallbackIsDark);
+        return;
+      }
+
+      const avg = getRegionAverageBrightness(img, sampleRect);
+      setHeaderZoneContrast(target, avg < 140);
+    });
   };
   img.onerror = () => {
-    document.body.classList.add('is-dark-hero');
-    document.body.classList.remove('is-light-hero');
-    setMobileMenuContrast(true);
+    if (requestId !== headerContrastRequestId) {
+      return;
+    }
+    clearHeaderZoneContrast();
   };
+};
+
+const refreshHeaderZoneContrast = () => {
+  if (heroSection) {
+    const currentHeroImage =
+      heroSection.querySelector('.hero-image--fade.is-visible') ||
+      heroSection.querySelector('.hero-image--static');
+    updateHeaderZoneContrast(currentHeroImage?.currentSrc || currentHeroImage?.src, heroSection);
+  } else if (pageHeroSection) {
+    updateHeaderZoneContrast(getBackgroundImageUrl(pageHeroSection), pageHeroSection);
+  } else {
+    clearHeaderZoneContrast();
+  }
 };
 
 const setMenuState = (isOpen) => {
@@ -140,12 +324,16 @@ const observer = new IntersectionObserver(
 
 reveals.forEach((element) => observer.observe(element));
 
-serviceCards.forEach((card) => {
-  const src = card.dataset.image;
-  if (src) {
-    updateServiceCardContrast(card, src);
-  }
-});
+const refreshServiceCardContrast = () => {
+  serviceCards.forEach((card) => {
+    const src = card.dataset.image;
+    if (src) {
+      updateServiceCardContrast(card, src);
+    }
+  });
+};
+
+refreshServiceCardContrast();
 
 if (heroSection) {
   const heroImages = (heroSection.dataset.heroImages || '')
@@ -172,7 +360,8 @@ if (heroSection) {
       }
       isTransitioning = true;
       heroFadeImage.onload = () => {
-        setHeroTextContrast(heroFadeImage.src);
+        setHeaderTextContrast(heroFadeImage.src);
+        updateHeaderZoneContrast(heroFadeImage.src, heroSection);
         requestAnimationFrame(() => {
           heroFadeImage.classList.add('is-visible');
         });
@@ -234,14 +423,28 @@ if (heroSection) {
 
   if (heroMainImage) {
     if (heroMainImage.complete && heroMainImage.naturalWidth) {
-      setHeroTextContrast(heroMainImage.src);
+      setHeaderTextContrast(heroMainImage.src);
+      updateHeaderZoneContrast(heroMainImage.currentSrc || heroMainImage.src, heroSection);
     } else {
-      heroMainImage.addEventListener('load', () => setHeroTextContrast(heroMainImage.src));
+      heroMainImage.addEventListener('load', () => {
+        setHeaderTextContrast(heroMainImage.src);
+        updateHeaderZoneContrast(heroMainImage.currentSrc || heroMainImage.src, heroSection);
+      });
     }
   }
+} else if (pageHeroSection) {
+  const pageHeroImage = getBackgroundImageUrl(pageHeroSection);
+  setHeaderTextContrast(pageHeroImage);
+  updateHeaderZoneContrast(pageHeroImage, pageHeroSection);
 } else {
-  setMobileMenuContrast(false);
+  setHeaderContrastMode(false);
+  clearHeaderZoneContrast();
 }
+
+window.addEventListener('resize', () => {
+  refreshHeaderZoneContrast();
+  refreshServiceCardContrast();
+});
 
 const galleryItems = Array.from(document.querySelectorAll('.gallery-item')).filter(
   (item) => item.dataset.image
