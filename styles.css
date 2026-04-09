@@ -53,6 +53,8 @@ img {
 
 .section {
   padding: 100px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .eyebrow {
@@ -384,6 +386,7 @@ mobile-menu__cta a{
 .hero--static .hero-image--fade {
   opacity: 0;
   transition: opacity 0.9s ease;
+  will-change: opacity;
 }
 
 .hero--static .hero-image--fade.is-visible {
@@ -590,6 +593,10 @@ body.is-light-hero {
   gap: 18px;
 }
 
+.gallery--fixed-portraits {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .story-inner {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -767,6 +774,7 @@ input, select, textarea {
   height: auto;
   box-shadow: var(--shadow);
   pointer-events: auto;
+  content-visibility: auto;
 }
 
 .lightbox__counter {
@@ -870,6 +878,10 @@ input, select, textarea {
 }
 
 @media (max-width: 900px) {
+  .gallery--fixed-portraits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   :root {
     --header-height: 64px;
   }
@@ -954,6 +966,10 @@ input, select, textarea {
 }
 
 @media (max-width: 600px) {
+  .gallery--fixed-portraits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .section {
     padding: 70px 0;
   }
