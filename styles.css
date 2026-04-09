@@ -468,6 +468,22 @@ body.is-light-hero {
   background: linear-gradient(120deg, rgba(247, 243, 239, 0.45), rgba(20, 16, 12, 0.08));
 }
 
+.page-hero--image {
+  background-size: cover;
+  background-position: center;
+  color: #f8f4f0;
+}
+
+.page-hero--image::after {
+  background: linear-gradient(120deg, rgba(22, 17, 12, 0.7), rgba(22, 17, 12, 0.28));
+}
+
+.page-hero--image .eyebrow,
+.page-hero--image h1,
+.page-hero--image p {
+  color: #f8f4f0;
+}
+
 .page-hero__content {
   position: relative;
   z-index: 1;
